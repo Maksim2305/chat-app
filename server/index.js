@@ -14,15 +14,35 @@ const io = new Server(server, {
 
 app.use(express.static('public'));
 
-io.on('connection', (socket) => {
-    console.log('a user connected');
+const users = {};
 
-    socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);
+io.on('connection', (socket) => {
+    socket.on('sendMessage', (msg) => {
+        io.emit('responseMessage', msg);
     });
 
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
+    socket.on('joinChat', (data) => {
+        const { username, id, avatar } = data;
+        users[socket.id] = { username, id, avatar };
+        io.emit('onlineUsers', users);
+    });
+
+    socket.on('disconnect', () => {    
+        delete users[socket.id];
+        io.emit('onlineUsers', users);
+    });
+
+    socket.on('leaveChat', () => {    
+        delete users[socket.id];
+        io.emit('onlineUsers', users);
+    });
+
+    socket.on('typing', (username) => {
+        socket.broadcast.emit('userTyping', username);
+    });
+    
+    socket.on('stopTyping', (username) => {
+        socket.broadcast.emit('userStoppedTyping', username);
     });
 });
 
