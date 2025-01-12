@@ -4,7 +4,7 @@ import Home from './components/Home';
 import Chat from './components/Chat';
 import io, { Socket } from 'socket.io-client';
 
-const socket: Socket = io('http://localhost:5000');
+const socket: Socket = io('https://chat-app-8373-q56pyjjnu-maxs-projects-f7e7037c.vercel.app');
 
 
 function App(): JSX.Element {
