@@ -1,0 +1,10 @@
+{
+    "projects": [
+      {
+        "source": "client",
+        "output": "dist",
+        "buildCommand": "npm run build",
+        "framework": null
+      }
+    ]
+  }
