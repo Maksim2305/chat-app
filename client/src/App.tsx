@@ -4,7 +4,7 @@ import Home from './components/Home';
 import Chat from './components/Chat';
 import io, { Socket } from 'socket.io-client';
 
-const socket: Socket = io('https://chat-app-8373.vercel.app/');
+const socket: Socket = io('wss://talented-spectacular-elf.glitch.me');
 
 
 function App(): JSX.Element {
