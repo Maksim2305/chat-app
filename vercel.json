@@ -1,10 +1,17 @@
 {
-    "projects": [
+    "builds": [
       {
-        "source": "client",
-        "output": "dist",
-        "buildCommand": "npm run build",
-        "framework": null
+        "src": "client/package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "dist"
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
       }
     ]
   }
